@@ -1,5 +1,5 @@
 = text-io-web-example
-:author: 
+:author:
 :revnumber: {project-version}
 :toc: left
 :toclevels: 3
@@ -7,8 +7,11 @@
 :data-uri:
 :caption:
 :last-update-label!:
+:docinfo1:
 
 :leveloffset: +1
+
+:toc!:
 
 include::introduction.adoc[]
 include::getting_started.adoc[]

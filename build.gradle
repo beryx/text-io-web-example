@@ -1,6 +1,4 @@
-
 import org.apache.tools.ant.filters.ReplaceTokens
-import org.gradle.plugins.signing.Sign
 
 plugins {
     id 'java'
@@ -9,8 +7,6 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'findbugs'
-    id 'signing'
-    id 'maven-publish'
     id "com.github.ethankhall.semantic-versioning" version "1.1.0"
     id "com.github.ben-manes.versions" version "0.13.0"
     id "com.jfrog.bintray" version "1.7.2"
@@ -86,14 +82,6 @@ license {
 }
 
 
-signing {
-    sign configurations.archives
-}
-
-signArchives {
-  onlyIf { gradle.taskGraph.allTasks.findAll {task -> isPublishTask(task)} }
-}
-
 dependencies {
   
   compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
@@ -142,31 +130,6 @@ task javadocJar(type: Jar, dependsOn: classes) {
 }
 artifacts {
     (System.getenv("TRAVIS") == "true") ? archives(sourcesJar) : archives(sourcesJar, javadocJar)
-}
-
-publishing {
-    publications {
-        "text-io-web-example"(MavenPublication) {
-            from components.java
-            artifact sourcesJar { classifier "sources" }
-            artifact javadocJar { classifier "javadoc" }
-            groupId 'org.beryx'
-            artifactId project.name
-            version textIoWebExampleVersion
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('name', "Module $project.name")
-                root.appendNode('description', "The $project.name artifact")
-                root.children().last() + pomConfig
-
-                // We cannot configure the licenses in pomConfig due to a name conflict with the 'license' extension defined by the com.github.hierynomus.license plugin
-                def licenseNode = root.appendNode('licenses').appendNode('license')
-                licenseNode.appendNode('name', 'The Apache Software License, Version 2.0')
-                licenseNode.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
-                licenseNode.appendNode('distribution', 'repo')
-            }
-        }
-    }
 }
 
 task "create-dirs" {
@@ -295,71 +258,4 @@ def configureJavadoc(task) {
           links "http://docs.oracle.com/javase/8/docs/api/"
       }
   }
-}
-
-def readFromConsole(prompt) {
-    readFromConsole('', prompt)
-}
-def readFromConsole(header, prompt) {
-    readFromConsole(header, prompt, false)
-}
-def readPasswordFromConsole(prompt) {
-    readPasswordFromConsole(prompt, true)
-}
-def readPasswordFromConsole(header, prompt) {
-    readFromConsole(header, prompt, true)
-}
-def readFromConsole(header, prompt, isPassword) {
-    def console = System.console()
-    if (console) {
-        if(header) {
-            console.printf "\n\n# $header\n"
-        }
-        String value = null;
-        while(!value?.trim()) {
-            def val = console."read${isPassword ? 'Password' : 'Line'}"("> $prompt: ")
-            if(val) {
-                value = new String(val)
-            }
-        }
-        return value
-    } else {
-      throw new GradleException("Cannot get console. Try running gradle with the '--no-daemon' option")
-    }
-}
-
-def isPublishTask(task) {
-  task.name.startsWith('publish')
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    if (gradle.taskGraph.allTasks.findAll {task -> isPublishTask(task)}) {
-        def password = readPasswordFromConsole('Please enter your signing credentials', 'PGP Private Key Password')
-        allprojects { ext."signing.keyId" = signingKeyId }
-        allprojects { ext."signing.secretKeyRingFile" = signingSecretKeyRingFile }
-        allprojects { ext."signing.password" = password }
-    }
-}
-
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.getProperty('bintrayUser') : "unknownUser"
-    key =  project.hasProperty('bintrayKey') ? project.getProperty('bintrayKey') : "unknownKey"
-    publications = ['text-io-web-example']
-    pkg {
-        repo = 'maven'
-        name = 'text-io-web-example'
-        userOrg = 'beryx'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/beryx/text-io-web-example.git'
-
-        version {
-                name = textIoWebExampleVersion
-                desc = "text-io-web-example $textIoWebExampleVersion"
-                released  = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
-                vcsTag = textIoWebExampleVersion
-                gpg {
-                    sign = true
-                }
-        }
-    }
 }
