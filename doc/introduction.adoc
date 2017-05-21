@@ -1,0 +1,13 @@
+[[introduction]]
+= Introduction
+
+NOTE: The source code is available on https://github.com/beryx/text-io-web-example[GitHub].
+
+text-io-web-example is licensed under the Apache-2.0 license.
+Click the icon below to read the license file:
+
+image::license.png[role="thumb" link="{blob-root}/LICENSE"]
+
+A few words about text-io-web-example:
+
+*TBD*
