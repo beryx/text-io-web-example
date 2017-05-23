@@ -1,0 +1,32 @@
+.schedule-title {
+    color: #00a020;
+}
+
+table {
+    border-collapse: collapse;
+}
+th, td {
+    font-weight: bold;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+th {
+    color: white;
+    background-color: #9090d0;
+}
+tfoot {
+    visibility: hidden;
+}
+.date-th, .name-th {
+    font-size: 24px;
+}
+.td_text {
+    font-size: 20px;
+}
+.name-td {
+    color: #802080;
+}
+
+.date-td {
+    color: #a08040;
+}
