@@ -12,7 +12,7 @@ plugins {
     id "com.jfrog.bintray" version "1.7.2"
     id "org.asciidoctor.convert" version "1.5.3"
     id "org.ajoberstar.git-publish" version "0.1.0"
-    id "com.github.hierynomus.license" version "0.12.1"
+    id "com.github.hierynomus.license" version "0.14.0"
     id "net.saliman.properties" version "1.4.6"
     id 'com.github.jk1.dependency-license-report' version '0.3.8'
 }
@@ -74,6 +74,7 @@ license {
     header rootProject.file("license-header.txt")
     skipExistingHeaders true
     ignoreFailures false
+    excludes(["**/*.properties", "**/static"])
 }
 
 
