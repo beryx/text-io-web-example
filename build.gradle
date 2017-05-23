@@ -15,6 +15,8 @@ plugins {
     id "com.github.hierynomus.license" version "0.14.0"
     id "net.saliman.properties" version "1.4.6"
     id 'com.github.jk1.dependency-license-report' version '0.3.8'
+    id "com.dorongold.task-tree" version "1.3"
+    id "com.moowork.node" version "1.1.1"
 }
 
 project.version.with {
@@ -220,10 +222,10 @@ artifacts {
 }
 jar {
     manifest {
-        attributes 'Main-Class': 'org.beryx.textio.web.example.TextIoWebExampleMain'
+        attributes 'Main-Class': 'org.beryx.textio.web.example.ExampleMain'
     }
 }
-mainClassName = 'org.beryx.textio.web.example.TextIoWebExampleMain'
+mainClassName = 'org.beryx.textio.web.example.ExampleMain'
 
 applicationName = "textIoWebExample"
 
@@ -239,8 +241,6 @@ applicationDistribution.from("${rootProject.projectDir}/..") {
     include('LICENSE', 'NOTICE')
 }
 
-
-
 configureJavadoc(javadoc)
 
 def configureJavadoc(task) {
@@ -255,3 +255,19 @@ def configureJavadoc(task) {
       }
   }
 }
+
+node {
+    version = '7.8.0'
+    download = true
+    workDir = file("${project.buildDir}/nodejs")
+    nodeModulesDir = file("${project.projectDir}/src/web")
+}
+
+task runWebpack(type: NpmTask, dependsOn: 'npmInstall') {
+    inputs.dir('src/web')
+    outputs.dir('src/main/resources/static')
+    outputs.file('src/main/resources/static/index.html')
+    args = ['run', 'webpack']
+}
+
+processResources.dependsOn runWebpack
