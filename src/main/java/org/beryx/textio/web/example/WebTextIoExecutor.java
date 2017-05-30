@@ -36,7 +36,8 @@ public class WebTextIoExecutor {
         return this;
     }
 
-    public void execute(TextIoApp app) {
+    @SuppressWarnings("unchecked")
+    public void execute(TextIoApp<?> app) {
         Consumer<String> stopServer = sessionId ->
                 Executors.newSingleThreadScheduledExecutor()
                 .schedule(() -> System.exit(0), 2, TimeUnit.SECONDS);

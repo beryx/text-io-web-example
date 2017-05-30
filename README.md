@@ -4,3 +4,5 @@
 ## text-io-web-example ##
 
 Example application using a [text-io](https://github.com/beryx/text-io) [WebTextTerminal](http://text-io.beryx.org/releases/latest/#web_text_term).
+
+Read the [documentation](http://text-io-web-example.beryx.org/releases/latest/).

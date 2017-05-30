@@ -1,5 +1,5 @@
 = text-io-web-example
-:author:
+:author:  Serban Iordache
 :revnumber: {project-version}
 :toc: left
 :toclevels: 3
@@ -14,8 +14,7 @@
 :toc!:
 
 include::introduction.adoc[]
+
 include::getting_started.adoc[]
-include::user_guide.adoc[]
-include::dev_guide.adoc[]
 
 :leveloffset: -1

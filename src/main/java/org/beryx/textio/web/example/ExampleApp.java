@@ -27,6 +27,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+/**
+ * The Text-IO runner of this application
+ */
 public class ExampleApp implements BiConsumer<TextIO, String> {
     private static Dictionary[] DICTIONARIES = {
             new Dictionary("English", Locale.US, "EEEE, MMMM dd, yyyy","On-Call Schedule", "Date", "Name"),
@@ -62,6 +65,7 @@ public class ExampleApp implements BiConsumer<TextIO, String> {
     }
 
     private static class ResultData {
+        @SuppressWarnings("unused")
         final String title;
         final Map<String, String> tableHeaders = new LinkedHashMap<>();
         final Map<String, String>[] tableData;

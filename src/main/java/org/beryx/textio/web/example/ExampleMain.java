@@ -22,12 +22,15 @@ import org.beryx.textio.web.WebTextTerminal;
 
 import java.util.function.BiConsumer;
 
+/**
+ * Main application class
+ */
 public class ExampleMain {
     public static void main(String[] args) {
-        BiConsumer<TextIO, String> app = new ExampleApp();
+        BiConsumer<TextIO, String> appRunner = new ExampleApp();
 
         WebTextTerminal webTextTerm = new WebTextTerminal();
-        TextIoApp textIoApp = new RatpackTextIoApp(app, webTextTerm);
+        TextIoApp<?> textIoApp = new RatpackTextIoApp(appRunner, webTextTerm);
         WebTextIoExecutor webTextIoExecutor = new WebTextIoExecutor();
         webTextIoExecutor.execute(textIoApp);
     }

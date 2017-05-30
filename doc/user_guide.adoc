@@ -1,8 +1,0 @@
-[[user_guide]]
-= User Guide
-
-NOTE: The JavaDoc is available link:javadoc/[here].
-
-The following section describes the steps required to start using text-io-web-example:
-
-*TBD*

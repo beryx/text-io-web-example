@@ -3,20 +3,32 @@
 
 CAUTION: You need Java 8 or newer in order to use text-io-web-example.
 
-text-io-web-example is available in Maven Central and JCenter.
+*Command Line Build*
 
-[subs="attributes",options="nowrap",title="Maven"]
+text-io-web-example is built with http://www.gradle.org[Gradle] and requires JDK 8 or higher.
+Clone the GitHub repository, `cd` into the top directory and start the build:
+
+[source]
+----
+git clone https://github.com/beryx/text-io-web-example.git
+cd text-io-web-example
+./gradlew clean build            (On Windows: gradlew clean build)
 ----
 
-&lt;dependency&gt;
-    &lt;groupId&gt;{project-group}&lt;/groupId&gt;
-    &lt;artifactId&gt;{project-name}&lt;/artifactId&gt;
-    &lt;version&gt;{project-version}&lt;/version&gt;
-&lt;/dependency&gt;
-----
 
-[subs="attributes",options="nowrap",title="Gradle"]
-----
+*IntelliJ Idea*
 
-compile '{project-group}:{project-name}:{project-version}'
-----
+- start the IntelliJ Idea IDE
+- open _build.gradle_
+- to automatically run webpack, check the settings box "Delegate IDE build/run actions to gradle":
+
+image::idea-gradle.png[]
+- run ExampleMain
+
+
+*Eclipse*
+
+- start the Eclipse IDE
+- install a recent version of https://projects.eclipse.org/projects/tools.buildship[Buildship].
+- import the project using the Gradle Project wizard
+- run ExampleMain

@@ -6,7 +6,7 @@
   "scripts": {
     "webpack": "webpack"
   },
-  "author": "",
+  "author": "Serban Iordache",
   "license": "Apache-2.0",
   "devDependencies": {
     "clean-webpack-plugin": "0.1.16",
