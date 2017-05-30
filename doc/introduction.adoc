@@ -12,7 +12,7 @@ This project shows you how to integrate a http://text-io.beryx.org/releases/late
 
 Click on the image below to see a sample run of the application.
 
-image::example-run-thumb.gif[role="thumb" link="{blob-root}/doc/img/example-run.gif"]
+image::example-run-thumb.gif[role="thumb" link="https://github.com/beryx/text-io-web-example/raw/master/doc/img/example-run.gif"]
 
 This simple application demonstrates:
 
