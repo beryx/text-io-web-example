@@ -17,6 +17,7 @@ package org.beryx.textio.web.example;
 
 import org.beryx.textio.TextIO;
 import org.beryx.textio.web.RatpackTextIoApp;
+import org.beryx.textio.web.RunnerData;
 import org.beryx.textio.web.TextIoApp;
 import org.beryx.textio.web.WebTextTerminal;
 
@@ -27,7 +28,7 @@ import java.util.function.BiConsumer;
  */
 public class ExampleMain {
     public static void main(String[] args) {
-        BiConsumer<TextIO, String> appRunner = new ExampleApp();
+        BiConsumer<TextIO, RunnerData> appRunner = new ExampleApp();
 
         WebTextTerminal webTextTerm = new WebTextTerminal();
         TextIoApp<?> textIoApp = new RatpackTextIoApp(appRunner, webTextTerm);

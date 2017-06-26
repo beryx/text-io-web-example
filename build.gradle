@@ -78,7 +78,7 @@ license {
 
 dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-    compile 'org.beryx:text-io-web:2.3.0'
+    compile 'org.beryx:text-io-web:2.6.0'
     compile 'io.ratpack:ratpack-core:1.4.6'
     compile 'io.ratpack:ratpack-session:1.4.6'
 

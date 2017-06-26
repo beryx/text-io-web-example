@@ -18,6 +18,7 @@ package org.beryx.textio.web.example;
 import com.google.gson.Gson;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
+import org.beryx.textio.web.RunnerData;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,7 +31,7 @@ import java.util.function.BiConsumer;
 /**
  * The Text-IO runner of this application
  */
-public class ExampleApp implements BiConsumer<TextIO, String> {
+public class ExampleApp implements BiConsumer<TextIO, RunnerData> {
     private static Dictionary[] DICTIONARIES = {
             new Dictionary("English", Locale.US, "EEEE, MMMM dd, yyyy","On-Call Schedule", "Date", "Name"),
             new Dictionary("German", Locale.GERMANY, "EEEE, dd MMMM yyyy", "Bereitschaftsplan", "Datum", "Name"),
@@ -96,14 +97,14 @@ public class ExampleApp implements BiConsumer<TextIO, String> {
     }
 
     @Override
-    public void accept(TextIO textIO, String initData) {
+    public void accept(TextIO textIO, RunnerData runnerData) {
         int dayCount = textIO.newIntInputReader()
                 .withMinVal(3)
                 .withMaxVal(7)
                 .read("For how many days do you plan the schedule?");
 
         String[] names = new String[dayCount];
-
+        String initData = (runnerData == null) ? null : runnerData.getInitData();
         Calendar cal = getCalendar(initData);
         DateFormat sdf = DICTIONARIES[0].getDateFormat();
         for(int i = 0; i < dayCount; i++) {
