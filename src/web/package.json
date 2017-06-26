@@ -19,6 +19,6 @@
   "dependencies": {
     "flatpickr": "2.6.3",
     "table-builder": "2.0.5",
-    "text-io": "2.3.0"
+    "text-io": "2.6.0"
   }
 }
